@@ -5,25 +5,25 @@ import {
   Grid,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { apiTest } from '../api/controllers';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { getRandomRecipes } from '../api/controllers';
 
 export function App() {
+  // const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    console.log(apiTest('chicken'));
+    // const test = async() => { console.log(await getRandomRecipes(31));}
+    test();
   }, [])
 
-  return <Box textAlign="center" fontSize="xl">
+  return (
+    <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
         <VStack spacing={8}>
-          <Text>
-            App
-          </Text>
+          <Text>App</Text>
         </VStack>
       </Grid>
     </Box>
+  );
 }
 
 export default App
