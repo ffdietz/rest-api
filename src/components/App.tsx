@@ -1,28 +1,37 @@
+/* eslint-disable */
 import {
-  Box,
-  Text,
-  VStack,
-  Grid,
+  Container, Wrap,
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
-import { getRandomRecipes } from '../api/controllers';
+import DailyMeal from './DailyMealGenerator';
+import Header from './Header';
+import Login from './Login';
 
+// error handling
+// read error http codes
 export function App() {
-  // const [menu, setMenu] = useState([]);
-
-  useEffect(() => {
-    // const test = async() => { console.log(await getRandomRecipes(31));}
-    test();
-  }, [])
+  const days = [
+    'Monday', 
+    'Tuesday', 
+    'Wednesday', 
+    'Thursday', 
+    'Friday', 
+    'Saturday',
+    'Sunday'
+  ];
 
   return (
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <VStack spacing={8}>
-          <Text>App</Text>
-        </VStack>
-      </Grid>
-    </Box>
+    <Container w="90vw" textAlign="center" fontSize="xl" p="1rem" centerContent>
+      <Header />
+      <Login />
+      {/* <RecipeSearch /> */}
+      <Wrap marginTop="5vh" spacing={30} justify='center'>
+       {days &&
+         days.map((day) => (
+            <DailyMeal day={day} key={day}/>
+         ))
+       }
+       </Wrap>
+    </Container>
   );
 }
 

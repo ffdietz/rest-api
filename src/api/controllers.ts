@@ -1,10 +1,18 @@
 import recipesClient from './client';
 
 export const getRandomRecipes = async (quantiy : number) => {
-  const response = await recipesClient.get(
-    `/random?number=${quantiy}&apiKey=${process.env.REACT_APP_SP_KEY}`
-  );
-  return response.data
+  
+  try{
+    const response = await recipesClient.get(
+      `/random?number=${quantiy}&apiKey=${process.env.REACT_APP_SP_KEY}`
+    );
+    console.log(response);
+    return response.data
+
+  } catch (error) { return error }
+
 } 
 
-export const anotherTest = {};
+export const getMealPlan = async () => {
+
+};
