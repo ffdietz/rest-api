@@ -1,4 +1,11 @@
-import { Box, Button, Container, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
+import { 
+  Button, 
+  Container, 
+  Flex, 
+  FormControl, 
+  FormLabel, 
+  Input
+} from '@chakra-ui/react'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 
 interface Auth{
@@ -7,25 +14,25 @@ interface Auth{
 }
 
 function Login() {
-  const [activeLogin, setActiveLogin] = useState<boolean>(false);
-  const [auth, setComment] = useState<Auth>({
+  const [enableLogin, setEnableLogin] = useState<boolean>(false);
+  const [auth, setAuth] = useState<Auth>({
     user: '',
     pass: '',
   });
 
   const handleUserInput = (event: ChangeEvent<HTMLInputElement>) => {
     event.persist();
-    setComment((values) => ({
+    setAuth((values) => ({
       ...values,
-      author: event.target.value,
+      user: event.target.value,
     }));
   };
 
-  const handlePasswordInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handlePassInput = (event: ChangeEvent<HTMLInputElement>) => {
     event.persist();
-    setComment((values) => ({
+    setAuth((values) => ({
       ...values,
-      comment: event.target.value,
+      pass: event.target.value,
     }));
   };
 
@@ -38,43 +45,42 @@ function Login() {
     // }
   };
 
-  const handleActiveAuth = (
+  const handleEnableAuth = (
     event: React.MouseEvent<HTMLButtonElement | MouseEvent>
   ) => {
     event.preventDefault();
-    setActiveLogin(!activeLogin);
+    setEnableLogin(!enableLogin);
   }
 
 
   return (
     <Container marginTop="5vh">
       <>
-        <Button onClick={handleActiveAuth}>Login</Button>
-        {activeLogin && (
-          <Box>
+        <Button onClick={handleEnableAuth}>Login</Button>
+        {enableLogin && (
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <FormLabel>Name</FormLabel>
                 <Input
                   type="text"
-                  name="comment[author]"
+                  name="auth[author]"
                   defaultValue={auth.user}
                   onChange={handleUserInput}
-                  placeholder="Your name"
+                  placeholder="username"
                 />
               </FormControl>
               <FormControl>
                 <FormLabel>Comment</FormLabel>
-                <Textarea
-                  name="comment[comment]"
+                <Input
+                  type='password'
+                  name="auth[comment]"
                   defaultValue={auth.pass}
-                  onChange={handlePasswordInput}
-                  placeholder="Your comment"
+                  onChange={handlePassInput}
+                  placeholder="password"
                 />
               </FormControl>
               <Button type="submit">Submit</Button>
             </form>
-          </Box>
         )}
       </>
     </Container>
