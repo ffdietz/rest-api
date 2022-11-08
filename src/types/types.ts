@@ -1,5 +1,5 @@
 
-export interface measureUnit {
+export interface MeasureUnit {
   unit: {
     amount: number;
     unitShort: string;
@@ -26,7 +26,7 @@ export interface IngredientExtended {
   amount: number;
   unit: string;
   meta: string[];
-  measures: measureUnit[];
+  measures: MeasureUnit[];
 }
 
 export interface InstructionStep {

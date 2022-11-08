@@ -10,20 +10,19 @@ interface DailyMealProps {
 }
 
 function DailyMeal({ day }: DailyMealProps) {
-  const [menu, setMenu] = useState<Recipe[] | null>([]);
+  const [menu, setMenu] = useState<Recipe[]>([]);
+
+  const fetchRecipes = async () => {
+    const recipes = await getRandomRecipes(3);
+    setMenu(recipes.recipes);
+  };
 
   const handleGetButton = (
     event: React.MouseEvent<HTMLButtonElement | MouseEvent>
   ) => {
     event.preventDefault();
-    const fetchRecipes = async () => {
-      const recipes = await getRandomRecipes(3);
-      setMenu(recipes.recipes);
-    };
     fetchRecipes();
   };
-
-  console.log(menu);
 
   return (
     <WrapItem>

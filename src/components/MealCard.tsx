@@ -7,10 +7,10 @@ interface MealCardProps {
 }
 
 function MealCard({details}: MealCardProps) {
-  const { title, id } = details;
+  const { title } = details;
   return (
     <Container m="15px 0">
-      <Text fontSize="sm" key={id}>{title}</Text>
+      <Text fontSize="sm">{title}</Text>
     </Container>
   );
 }

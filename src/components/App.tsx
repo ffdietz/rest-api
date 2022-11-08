@@ -24,7 +24,7 @@ export function App() {
       <Header />
       <Login />
       {/* <RecipeSearch /> */}
-      <Wrap marginTop="5vh" spacing={30} justify='center'>
+      <Wrap spacing="30px" justify='center' marginTop="5vh">
        {days &&
          days.map((day) => (
             <DailyMeal day={day} key={day}/>
