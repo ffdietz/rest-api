@@ -29,7 +29,7 @@ import { client } from './client';
 export const getAnotherMeal = async (): Promise<RecipeRevenge[] | unknown> => {
   try {
     const response = await client.get('/posts');
-
+    console.log(response)
     return response.data.slice(0, 3);
   } catch (error) {
     return error;
@@ -42,6 +42,7 @@ export const loginPost = async (data: User) => {
       username: data.user,
       password: data.pass
     });
+    console.log(response)
     return response
   } catch (error) {
     return error;

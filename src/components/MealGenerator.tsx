@@ -9,8 +9,6 @@ import MealCard from './MealCard';
 interface DailyMealProps {
   day: string;
 }
-// handle isLoading at the begin
-// useQuery mutation // https://jsonplaceholder.typicode.com/
 
 function MealGenerator({ day }: DailyMealProps) {
   const { isError, isFetching, data, refetch } = useQuery({
@@ -33,10 +31,10 @@ function MealGenerator({ day }: DailyMealProps) {
         <Text>{day}</Text>
         <Button onClick={() => refetch()}>GET</Button>
         <Flex flexDirection="column" alignItems="stretch">
-          {/* {data &&
+          {data &&
             data?.map((recipe: RecipeRevenge) => (
               <MealCard details={recipe} key={recipe.id} />
-            ))} */}
+            ))}
         </Flex>
       </VStack>
     </WrapItem>
