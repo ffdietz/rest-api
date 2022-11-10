@@ -1,5 +1,11 @@
+export interface RecipeRevenge {
+  userId: number,
+  id: number,
+  title: string,
+  body: string,
+}
 
-export interface measureUnit {
+export interface MeasureUnit {
   unit: {
     amount: number;
     unitShort: string;
@@ -26,7 +32,7 @@ export interface IngredientExtended {
   amount: number;
   unit: string;
   meta: string[];
-  measures: measureUnit[];
+  measures: MeasureUnit[];
 }
 
 export interface InstructionStep {
@@ -42,6 +48,108 @@ export interface Instructions {
 }
 
 export interface Recipe {
+  uri: string;
+  label: string;
+  image: string;
+  images: {
+    THUMBNAIL: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    SMALL: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    REGULAR: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    LARGE: {
+      url: string;
+      width: number;
+      height: number;
+    };
+  };
+  source: string;
+  url: string;
+  shareAs: string;
+  yield: number;
+  dietLabels: string[];
+  healthLabels: string[];
+  cautions: string[];
+  ingredientLines: string[];
+  ingredients: [
+    {
+      text: string;
+      quantity: number;
+      measure: string;
+      food: string;
+      weight: number;
+      foodId: string;
+    }
+  ];
+  calories: number;
+  glycemicIndex: number;
+  totalCO2Emissions: number;
+  co2EmissionsClass: string;
+  totalWeight: number;
+  cuisineType: string[];
+  mealType: string[];
+  dishType: string[];
+  instructions: string[];
+  tags: string[];
+  externalId: string;
+  totalNutrients: {};
+  totalDaily: {};
+  digest: [
+    {
+      label: string;
+      tag: string;
+      schemaOrgTag: string;
+      total: number;
+      hasRDI: true;
+      daily: number;
+      unit: string;
+      sub: {};
+    }
+  ];
+}
+
+export interface EDRequest {
+  from: number;
+  to: number;
+  count: number;
+  _links: {
+    self: {
+      href: string;
+      title: string;
+    };
+    next: {
+      href: string;
+      title: string;
+    };
+  };
+  hits: [
+    {
+      recipe: Recipe;
+      _links: {
+        self: {
+          href: string;
+          title: string;
+        };
+        next: {
+          href: string;
+          title: string;
+        };
+      };
+    }
+  ];
+}
+
+export interface RecipeSP {
   vegetarian: boolean;
   vegan: boolean;
   glutenFree: boolean;
@@ -78,6 +186,10 @@ export interface Recipe {
   analyzedInstructions: Instructions[];
   originalId: number;
   spoonacularSourceUrl: string;
-};
+}
 
 
+export interface User {
+  user: string;
+  pass: string;
+}

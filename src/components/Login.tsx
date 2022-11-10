@@ -1,84 +1,77 @@
-import { Box, Button, Container, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import {
+  Button,
+  Container,
+  FormControl,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { loginPost } from '../api/controllers';
 
-interface Auth{
+interface Auth {
   user: string;
   pass: string;
 }
 
 function Login() {
-  const [activeLogin, setActiveLogin] = useState<boolean>(false);
-  const [auth, setComment] = useState<Auth>({
+  const [enableLogin, setEnableLogin] = useState<boolean>(true);
+  const [auth, setAuth] = useState<Auth>({
     user: '',
     pass: '',
   });
 
   const handleUserInput = (event: ChangeEvent<HTMLInputElement>) => {
-    event.persist();
-    setComment((values) => ({
+    setAuth((values) => ({
       ...values,
-      author: event.target.value,
+      user: event.target.value,
     }));
   };
 
-  const handlePasswordInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    event.persist();
-    setComment((values) => ({
+  const handlePassInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setAuth((values) => ({
       ...values,
-      comment: event.target.value,
+      pass: event.target.value,
     }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // if (id) {
-    //   const response = await postComment(id, comment);
-    //   console.log(response);
-    // }
+    const response = await loginPost(auth);
+    console.log(response)
   };
-
-  const handleActiveAuth = (
-    event: React.MouseEvent<HTMLButtonElement | MouseEvent>
-  ) => {
-    event.preventDefault();
-    setActiveLogin(!activeLogin);
-  }
-
 
   return (
     <Container marginTop="5vh">
       <>
-        <Button onClick={handleActiveAuth}>Login</Button>
-        {activeLogin && (
-          <Box>
-            <form onSubmit={handleSubmit}>
-              <FormControl>
-                <FormLabel>Name</FormLabel>
-                <Input
-                  type="text"
-                  name="comment[author]"
-                  defaultValue={auth.user}
-                  onChange={handleUserInput}
-                  placeholder="Your name"
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Comment</FormLabel>
-                <Textarea
-                  name="comment[comment]"
-                  defaultValue={auth.pass}
-                  onChange={handlePasswordInput}
-                  placeholder="Your comment"
-                />
-              </FormControl>
-              <Button type="submit">Submit</Button>
-            </form>
-          </Box>
+        <Button onClick={() => setEnableLogin(!enableLogin)}>Login</Button>
+        {enableLogin && (
+          <form onSubmit={handleSubmit}>
+            <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input
+                type="text"
+                name="auth[author]"
+                defaultValue={auth.user}
+                onChange={handleUserInput}
+                placeholder="username"
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                name="auth[comment]"
+                defaultValue={auth.pass}
+                onChange={handlePassInput}
+                placeholder="password"
+              />
+            </FormControl>
+            <Button type="submit">Submit</Button>
+          </form>
         )}
       </>
     </Container>
   );
 }
 
-export default Login
+export default Login;
