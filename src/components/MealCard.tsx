@@ -1,18 +1,19 @@
+import React from 'react';
 import { Container, Text } from '@chakra-ui/react';
-import React from 'react'
-import { Recipe } from '../types/types'
+import { RecipeRevenge } from '../types/types';
 
 interface MealCardProps {
-  details: Recipe
+  details: RecipeRevenge;
 }
 
-function MealCard({details}: MealCardProps) {
+function MealCard({ details }: MealCardProps) {
   const { title } = details;
+
   return (
     <Container m="15px 0">
-      <Text fontSize="sm">{title}</Text>
+      <Text fontSize="sm">{title.substring(0,15)}...</Text>
     </Container>
   );
 }
 
-export default MealCard
+export default MealCard;
